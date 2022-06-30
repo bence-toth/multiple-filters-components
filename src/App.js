@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
 
-function App() {
+import CategoryFilters from "./CategoryFilters";
+import NumberOfParticipantsFilters from "./NumberOfParticipantsFilters";
+import TimeFrameFilters from "./TimeFrameFilters";
+
+const App = () => {
+  const [categoryFilter, setCategoryFilter] = useState("");
+  const [numberOfParticipantsFilter, setNumberOfParticipantsFilter] =
+    useState("");
+  const [timeFrameFilter, setTimeFrameFilter] = useState("");
+
+  useEffect(() => {
+    console.log(
+      `https://my.server/activities?category=${categoryFilter}&particpants=${numberOfParticipantsFilter}&timeframe=${timeFrameFilter}`
+    );
+  }, [categoryFilter, numberOfParticipantsFilter, timeFrameFilter]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <CategoryFilters
+        selectedValue={categoryFilter}
+        setSelectedValue={setCategoryFilter}
+      />
+      <NumberOfParticipantsFilters
+        selectedValue={numberOfParticipantsFilter}
+        setSelectedValue={setNumberOfParticipantsFilter}
+      />
+      <TimeFrameFilters
+        selectedValue={timeFrameFilter}
+        setSelectedValue={setTimeFrameFilter}
+      />
     </div>
   );
-}
+};
 
 export default App;
